@@ -6,11 +6,11 @@ helm:
   version: 0.9.0
   values:
     keys:
-      lounge.pem.crt: |
-        '${ index .ClusterAnnotations "lounge.pem.crt" }'
-      lounge.private.pem.key: |
-        '${ index .ClusterAnnotations "lounge.private.pem.key" }'
-      lounge.public.pem.key: |
-        '${ index .ClusterAnnotations "lounge.public.pem.key" }'
-      root-CA.pem: |
-        '${ index .ClusterAnnotations "root-CA.pem" }'
+      lounge.pem.crt: |-
+        '${ get .ClusterAnnotations "lounge.pem.crt" }'
+      lounge.private.pem.key: |-
+        '${ get .ClusterAnnotations "lounge.private.pem.key" }'
+      lounge.public.pem.key: |-
+        '${ get .ClusterAnnotations "lounge.public.pem.key" }'
+      root-CA.pem: |-
+        '${ get .ClusterAnnotations "root-CA.pem" }'
