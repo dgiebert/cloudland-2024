@@ -35,13 +35,12 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: CERT_FILEPATH
-            value: /etc/aws-keys/lounge.pem.crt
-          - name: PRI_KEY_FILEPATH
-            value: /etc/aws-keys/lounge.private.pem.key
-          - name: CA_FILEPATH
-            value: /etc/aws-keys/root-CA.pem
-
+            - name: CERT_FILEPATH
+              value: /etc/aws-keys/lounge.pem.crt
+            - name: PRI_KEY_FILEPATH
+              value: /etc/aws-keys/lounge.private.pem.key
+            - name: CA_FILEPATH
+              value: /etc/aws-keys/root-CA.pem
           {{- with .Values.environment }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
