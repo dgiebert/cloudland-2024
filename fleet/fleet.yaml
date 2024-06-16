@@ -10,10 +10,7 @@ helm:
       lounge.private.pem.key: '${ get .ClusterAnnotations "lounge.private.pem.key" | b64enc }'
       lounge.public.pem.key: '${ get .ClusterAnnotations "lounge.public.pem.key" | b64enc }'
       root-CA.pem: '${ get .ClusterAnnotations "root-CA.pem" | b64enc }'
-    environment:
-    - name: MQTT_ENDPOINT
-      value: '${ get .ClusterAnnotations "mqtt-endpoint" }'
-    - name: MQTT_TOPIC
-      value: sensors/rooms/'${ index .ClusterLabels "management.cattle.io/cluster-display-name" }'
-    - name: CLIENT_ID
-      value: '${ index .ClusterLabels "management.cattle.io/cluster-display-name" }'
+    mqtt:
+      endpoint: '${ get .ClusterAnnotations "mqtt-endpoint" }'
+      client:
+        id: '${ index .ClusterLabels "management.cattle.io/cluster-display-name" }'

@@ -43,9 +43,12 @@ spec:
               value: /etc/aws-keys/root-CA.pem
             - name: PATH
               value: /opt/venv/bin:$PATH
-          {{- with .Values.environment }}
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
+            - name: MQTT_ENDPOINT
+              value: {{ .Values.mqtt.endpoint }}
+            - name: MQTT_TOPIC
+              value: sensors/rooms/{{ .Values.mqtt.client.id }}
+            - name: CLIENT_ID
+              value: {{ .Values.mqtt.client.id }}
           volumeMounts:
           - name: aws-keys
             mountPath: /etc/aws-keys
