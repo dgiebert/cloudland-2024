@@ -11,6 +11,6 @@ helm:
       lounge.private.pem.key: |-
         '${ index .ClusterAnnotations "lounge.private.pem.key" }'
       lounge.public.pem.key: |-
-        ${ index .ClusterAnnotations "lounge.public.pem.key" }'
+        '${ index .ClusterAnnotations "lounge.public.pem.key" }'
       root-CA.pem: |-
         '${ index .ClusterAnnotations "root-CA.pem" }'
