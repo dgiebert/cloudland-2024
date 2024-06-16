@@ -1,0 +1,12 @@
+defaultNamespace: default
+
+helm:
+  releaseName: cloudland-example
+  chart: "oci://ghcr.io/dgiebert/charts/cloudland"
+  version: 0.9.0
+  values:
+    keys:
+      lounge.pem.crt: '${ index .ClusterAnnotations "lounge.pem.crt" }'
+      lounge.private.pem.key: '${ index .ClusterAnnotations "lounge.private.pem.key" }'
+      lounge.public.pem.key: '${ index .ClusterAnnotations "lounge.public.pem.key" }'
+      root-CA.pem: '${ index .ClusterAnnotations "root-CA.pem" }'
