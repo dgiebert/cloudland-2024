@@ -32,7 +32,7 @@ securityContext:
   privileged: true
 
 # keys: []
-environment: []
+# environment: []
 # Additional volumes on the output Deployment definition.
 volumes: []
   # - name: aws-keys
