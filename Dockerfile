@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 FROM registry.suse.com/bci/python:${PYTHON_VERSION}
 COPY --from=builder /opt /opt
 ENV PATH="/opt/venv/bin:$PATH"
-ENTRYPOINT ["python3", "opt/src/test.py"]
+ENTRYPOINT ["python3", "opt/src/main.py"]
