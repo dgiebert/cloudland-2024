@@ -1,3 +1,5 @@
 .env/
+chart/
 .python-version
 Dockerfile
+elemental/
