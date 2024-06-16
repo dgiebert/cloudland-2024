@@ -3,10 +3,17 @@ defaultNamespace: default
 helm:
   releaseName: cloudland-example
   chart: "oci://ghcr.io/dgiebert/charts/cloudland"
-  version: 0.9.0
+  version: 0.9.1
   values:
     keys:
       lounge.pem.crt: '${ get .ClusterAnnotations "lounge.pem.crt" | b64enc }'
       lounge.private.pem.key: '${ get .ClusterAnnotations "lounge.private.pem.key" | b64enc }'
       lounge.public.pem.key: '${ get .ClusterAnnotations "lounge.public.pem.key" | b64enc }'
       root-CA.pem: '${ get .ClusterAnnotations "root-CA.pem" | b64enc }'
+    environment:
+    - name: MQTT_ENDPOINT
+      value: '${ get .ClusterAnnotations "mqtt-endpoint" }'
+    - name: MQTT_TOPIC
+      value: sensors/rooms/lounge4 #'${ index .ClusterLabels "management.cattle.io/cluster-display-name" }'
+    - name: CLIENT_ID
+      value: lounge4 #'${ index .ClusterLabels "management.cattle.io/cluster-display-name" }'

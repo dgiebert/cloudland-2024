@@ -32,6 +32,13 @@ securityContext:
   privileged: true
 
 # keys: []
+environment:
+- name: CERT_FILEPATH
+  value: /etc/aws-keys/lounge.pem.crt
+- name: PRI_KEY_FILEPATH
+  value: /etc/aws-keys/lounge.private.pem.key
+- name: CA_FILEPATH
+  value: /etc/aws-keys/root-CA.pem
 
 # Additional volumes on the output Deployment definition.
 volumes: []

@@ -34,6 +34,8 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            {{- toYaml .Values.environment | nindent 12 }}
           volumeMounts:
           - name: aws-keys
             mountPath: /etc/aws-keys
