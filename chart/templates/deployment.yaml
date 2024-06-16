@@ -41,6 +41,8 @@ spec:
               value: /etc/aws-keys/lounge.private.pem.key
             - name: CA_FILEPATH
               value: /etc/aws-keys/root-CA.pem
+            - name: PATH
+              value: /opt/venv/bin:$PATH
           {{- with .Values.environment }}
             {{- toYaml . | nindent 12 }}
           {{- end }}

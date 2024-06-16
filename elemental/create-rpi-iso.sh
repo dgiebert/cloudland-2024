@@ -53,15 +53,16 @@ cp livecd-cloud-config.yaml mount/
 
 mkdir -p mount/iso-config
 cat << HOOK > mount/iso-config/01_rpi-install-hook.yaml
-name: "Raspberry Pi after install hook"
+name: "Raspberry Pi Custom"
 stages:
-    after-install:
-    - &copyfirmware
-      name: "Copy firmware to EFI partition"
-      commands:
-      - cp -a /run/cos/workingtree/boot/vc/* /run/cos/efi
-    after-reset:
-    - <<: *copyfirmware
+  after-install:
+  - &copyfirmware
+    name: "Copy firmware to EFI partition"
+    commands:
+    - cp -a /run/cos/workingtree/boot/vc/* /run/cos/efi
+    - grub2-editenv /run/cos/oem/grubenv set extra_cmdline="iomem=relaxed strict-devmem=0"
+  after-reset:
+  - <<: *copyfirmware
 HOOK
 
 echo "Unmounting"
