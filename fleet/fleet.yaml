@@ -3,7 +3,7 @@ defaultNamespace: default
 helm:
   releaseName: cloudland-example
   chart: "oci://ghcr.io/dgiebert/charts/cloudland"
-  version: 0.9.1
+  version: 0.9.2
   values:
     keys:
       lounge.pem.crt: '${ get .ClusterAnnotations "lounge.pem.crt" | b64enc }'
