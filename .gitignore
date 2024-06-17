@@ -1,4 +1,3 @@
 .env/
-elemental/wifi.nmconnection
-livecd-cloud-config.yaml
-elemental/elemental-*
+elemental/registration.yaml
+elemental/seedimage.yaml

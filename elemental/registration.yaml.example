@@ -1,0 +1,51 @@
+apiVersion: elemental.cattle.io/v1beta1
+kind: MachineRegistration
+metadata:
+  name: cloudland-nodes
+  namespace: fleet-default
+spec:
+  config:
+    cloud-config:
+      users:
+        - name: root
+          ssh_authorized_keys:
+            - >-
+              ssh-ed25519
+    write_files:
+      - content: |
+          [connection]
+          id=CHANGEME_SSID
+          type=wifi
+          interface-name=wlan0
+
+          [wifi]
+          mode=infrastructure
+          ssid=CHANGEME_SSID
+
+          [wifi-security]
+          key-mgmt=wpa-psk
+          psk=CHANGEME_PSK
+
+          [ipv4]
+          method=auto
+        path: /etc/NetworkManager/system-connections/wifi.nmconnection
+        permissions: '0600'
+    elemental:
+      install:
+        device: /dev/mmcblk0
+        disable-boot-entry: true
+        reboot: true
+      registration:
+        auth: tpm
+        emulate-tpm: true
+        emulated-tpm-seed: -1
+      reset:
+        enabled: true
+        reboot: true
+        reset-oem: true
+        reset-persistent: true
+  machineInventoryLabels:
+    machineUUID: ${System Information/UUID}
+    manufacturer: ${System Information/Manufacturer}
+    productName: ${System Information/Product Name}
+    serialNumber: ${System Information/Serial Number}

@@ -1,0 +1,48 @@
+# https://elemental.docs.rancher.com/next/raspi-disk/#how-to-build-raw-disk-images-for-raspberry-pi
+apiVersion: elemental.cattle.io/v1beta1
+kind: SeedImage
+metadata:
+  name: cloudland-img
+  namespace: fleet-default
+spec:
+  baseImage: >-
+    registry.opensuse.org/isv/rancher/elemental/dev/containers/suse/sl-micro/6.0/baremetal-os-container:latest
+  cleanupAfterMinutes: 60
+  registrationRef:
+    apiVersion: elemental.cattle.io/v1beta1
+    kind: MachineRegistration
+    name: cloudland-nodes
+    namespace: fleet-default
+  cloud-config:
+    users:
+      - name: root
+        passwd: root
+    write_files:
+      - content: |
+          [connection]
+          id=CHANGEME_SSID
+          type=wifi
+          interface-name=wlan0
+
+          [wifi]
+          mode=infrastructure
+          ssid=CHANGEME_SSID
+
+          [wifi-security]
+          key-mgmt=wpa-psk
+          psk=CHANGEME_PSK
+
+          [ipv4]
+          method=auto
+        path: /etc/NetworkManager/system-connections/wifi.nmconnection
+        permissions: '0600'
+      - path: /run/initramfs/live/iso-config
+        content: |
+          name: "Add additional kernel parameters"
+          stages:
+            after-install:
+            - commands:
+              - grub2-editenv /run/cos/oem/grubenv set extra_cmdline="iomem=relaxed strict-devmem=0"
+  retriggerBuild: true
+  targetPlatform: linux/arm64
+  type: raw
