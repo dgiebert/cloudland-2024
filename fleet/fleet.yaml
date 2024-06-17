@@ -9,7 +9,7 @@ helm:
       lounge.pem.crt: '${ get .ClusterAnnotations "lounge.pem.crt" | b64enc }'
       lounge.private.pem.key: '${ get .ClusterAnnotations "lounge.private.pem.key" | b64enc }'
       lounge.public.pem.key: '${ get .ClusterAnnotations "lounge.public.pem.key" | b64enc }'
-      root-CA.pem: '${ get .ClusterAnnotations "root-CA.pem" | b64enc }'
+      root-CA.pem: '${ get .ClusterAnnotations "root-CA.crt" | b64enc }'
     mqtt:
       endpoint: '${ get .ClusterAnnotations "mqtt-endpoint" }'
       client:
