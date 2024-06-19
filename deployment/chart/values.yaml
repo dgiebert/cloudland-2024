@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/dgiebert/cloudland-2024
+  repository: ghcr.io/dgiebert/containers/cloudland-2024
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
