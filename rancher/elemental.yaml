@@ -1,4 +1,4 @@
-# Local Cluster
+# /var/lib/rancher/k3s/server/manifests/elemental.yaml
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
