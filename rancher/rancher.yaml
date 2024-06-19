@@ -1,4 +1,8 @@
-# /var/lib/rancher/k3s/server/manifests/rancher.yaml 
+# 1. Check compatibility using https://www.suse.com/suse-rancher/support-matrix/all-supported-versions
+# 2. curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.28.10+k3s1 sh -
+# 3. /var/lib/rancher/k3s/server/manifests/rancher.yaml
+
+# Cert Manager (Requirement for TLS Certs)
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
@@ -13,6 +17,7 @@ spec:
   valuesContent: |-
     installCRDs: true
 ---
+# Rancher Itself
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
@@ -32,3 +37,21 @@ spec:
     letsEncrypt:
       email: EMAIL
     replicas: 1
+---
+# Keep k3s up-to-date using system-upgrade-controller
+apiVersion: upgrade.cattle.io/v1
+kind: Plan
+metadata:
+spec:
+  channel: https://update.k3s.io/v1-release/channels/v1.28
+  concurrency: 1
+  cordon: true
+  nodeSelector:
+    matchExpressions:
+      - key: node-role.kubernetes.io/control-plane
+        operator: In
+        values:
+          - 'true'
+  serviceAccountName: system-upgrade
+  upgrade:
+    image: rancher/k3s-upgrade
