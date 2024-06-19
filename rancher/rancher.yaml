@@ -1,0 +1,34 @@
+# /var/lib/rancher/k3s/server/manifests/rancher.yaml 
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  namespace: kube-system
+  name: cert-manager
+spec:
+  targetNamespace: cert-manager
+  createNamespace: true
+  version: 1.15.0
+  chart: cert-manager
+  repo: https://charts.jetstack.io
+  valuesContent: |-
+    installCRDs: true
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  namespace: kube-system
+  name: rancher
+spec:
+  targetNamespace: cattle-system
+  createNamespace: true
+  version: 2.8.5
+  chart: rancher
+  repo: https://releases.rancher.com/server-charts/latest
+  valuesContent: |-
+    hostname: HOSTNAME
+    ingress:
+      tls:
+        source: letsEncrypt
+    letsEncrypt:
+      email: EMAIL
+    replicas: 1

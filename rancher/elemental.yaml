@@ -1,0 +1,22 @@
+# Local Cluster
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: elemental-operator
+  namespace: cattle-elemental-system
+spec:
+  chart: >-
+    oci://registry.opensuse.org/isv/rancher/elemental/dev/charts/rancher/elemental-operator-chart
+  createNamespace: true
+  version: 1.7.0
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: elemental-operator-crds
+  namespace: cattle-elemental-system
+spec:
+  chart: >-
+    oci://registry.opensuse.org/isv/rancher/elemental/dev/charts/rancher/elemental-operator-crds-chart
+  createNamespace: true
+  version: 1.7.0

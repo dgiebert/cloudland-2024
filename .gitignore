@@ -1,3 +1,4 @@
 .env/
 elemental/registration.yaml
 elemental/seedimage.yaml
+certs/*

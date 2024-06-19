@@ -36,13 +36,6 @@ spec:
           method=auto
         path: /etc/NetworkManager/system-connections/wifi.nmconnection
         permissions: '0600'
-      - path: /run/initramfs/live/iso-config
-        content: |
-          name: "Add additional kernel parameters"
-          stages:
-            after-install:
-            - commands:
-              - grub2-editenv /run/cos/oem/grubenv set extra_cmdline="iomem=relaxed strict-devmem=0"
   retriggerBuild: true
   targetPlatform: linux/arm64
   type: raw
