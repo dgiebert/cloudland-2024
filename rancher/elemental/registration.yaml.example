@@ -30,9 +30,9 @@ spec:
           method=auto
         path: /etc/NetworkManager/system-connections/wifi.nmconnection
         permissions: '0600'
-    runcmd:
-    - grub2-editenv /oem/grubenv set extra_cmdline="iomem=relaxed strict-devmem=0"
-    - reboot
+      runcmd:
+      - grub2-editenv /oem/grubenv set extra_cmdline="iomem=relaxed strict-devmem=0"
+      - reboot
     elemental:
       install:
         device: /dev/mmcblk0

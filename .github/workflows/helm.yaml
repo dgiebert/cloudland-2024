@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  CHARTS_DIR: chart
+  CHARTS_DIR: deployment/chart
 
 jobs:
   release:

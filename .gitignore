@@ -1,4 +1,4 @@
 .env/
-elemental/registration.yaml
-elemental/seedimage.yaml
+rancher/elemental/registration.yaml
+rancher/elemental/seedimage.yaml
 certs/*

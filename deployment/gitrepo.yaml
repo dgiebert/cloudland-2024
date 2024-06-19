@@ -1,0 +1,19 @@
+# /var/lib/rancher/k3s/server/manifests/gitrepo-cloudland-2024.yaml
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: cloudland-2024
+  namespace: fleet-default
+spec:
+  branch: main
+  correctDrift:
+    enabled: true
+  forceSyncGeneration: 15
+  insecureSkipTLSVerify: false
+  paths:
+    - /deployment/fleet
+  repo: https://github.com/dgiebert/cloudland-2024.git
+  targets:
+    - clusterName: lounge2
+    - clusterName: lounge3
+    - clusterName: lounge4
